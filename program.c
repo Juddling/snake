@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
+#include <sys/queue.h>
 
 // output in colour https://stackoverflow.com/a/3219471
 #define ANSI_COLOR_RED "\x1b[31m"
@@ -20,16 +22,13 @@ typedef struct
     int y;
 } position;
 
-typedef struct
+// snake is just a singley linked list
+typedef struct _snake
 {
-    int nums[10];
-    position body[255];
-} snake;
-
-// void debug_snake(snake s)
-// {
-//     printf("snake: x = %d, y = %d, length = %d", s.position.x, s.position.y, s.length);
-// }
+    position position;
+    SLIST_ENTRY(_snake)
+    next;
+} snake_t;
 
 void print_green(const char *content)
 {
@@ -38,7 +37,8 @@ void print_green(const char *content)
 
 bool is_snake(int x, int y)
 {
-    if (x == y) {
+    if (x == y)
+    {
         return true;
     }
 
@@ -67,12 +67,33 @@ void print_board()
 
 int main()
 {
-    position p = {1, 1};
-    position body[] = {p, p, p, p};
+    // creates a stuct for the head of the list
+    SLIST_HEAD(head_s, _snake)
+    head;
+    SLIST_INIT(&head);
 
-    snake s = {.nums = {5, 4, 3, 2, 1}};
+    position p = {1, 1};
+    snake_t *node;
+
+    // add three nodes to the snake
+    for (int i = 0; i < 3; i++)
+    {
+        node = (snake_t *)malloc(sizeof(snake_t));
+        node->position = p;
+
+        SLIST_INSERT_HEAD(&head, node, next);
+        p.y++;
+    }
+
+    snake_t *n;
+    SLIST_FOREACH(n, &head, next)
+    {
+        printf("position x = %d, y = %d\n", n->position.x, n->position.y);
+    }
+
+    // snake s = {.nums = {5, 4, 3, 2, 1}};
 
     // print_green("@@@@");
-    print_board();
+    // print_board();
     // debug_snake(s);
 }
