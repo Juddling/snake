@@ -19,3 +19,5 @@ typedef struct _snake
 SLIST_HEAD(head_s, _snake) head;
 
 bool is_snake(int x, int y);
+void snake_initialise();
+void snake_advance();
