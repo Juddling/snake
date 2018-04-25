@@ -1,3 +1,5 @@
+#include <time.h>
+
 #include "snake.h"
 #include "board.h"
 
@@ -5,9 +7,15 @@ int main()
 {
     snake_initialise();
 
-    // todo: call this at a regular interval
-    snake_advance();
-    snake_advance();
+    int miliseconds = 200;
+    struct timespec t;
+    t.tv_sec = 0;
+    t.tv_nsec = miliseconds * 1000 * 1000;
 
-    print_board();
+    while (true)
+    {
+        snake_advance();
+        print_board();
+        nanosleep(&t, NULL);
+    }
 }

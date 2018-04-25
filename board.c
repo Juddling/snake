@@ -17,8 +17,16 @@ void print_green(const char *content)
     printf(ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET, content);
 }
 
+void clear_terminal()
+{
+    // woo escape codes
+    printf("\033[H\033[J");
+}
+
 void print_board()
 {
+    clear_terminal();
+
     for (int y = 0; y < BOARD_Y; y++)
     {
         for (int x = 0; x < BOARD_X; x++)
