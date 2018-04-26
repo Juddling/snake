@@ -28,9 +28,9 @@ void snake_initialise()
     snake_t *node;
 
     // add three nodes to the snake
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < SNAKE_INITIAL_LENGTH; i++)
     {
-        node = (snake_t *)malloc(sizeof(snake_t));
+        node = malloc(sizeof(snake_t));
         node->position = p;
 
         SLIST_INSERT_HEAD(&head, node, next);
@@ -48,7 +48,7 @@ int direction_x(enum direction_t direction)
         default:
             return 0;
     }
-
+}
 
 int direction_y(enum direction_t direction)
 {
@@ -59,6 +59,21 @@ int direction_y(enum direction_t direction)
             return 1;
         default:
             return 0;
+    }
+}
+
+void remove_last()
+{
+    snake_t *n, *prev;
+
+    SLIST_FOREACH(n, &head, next)
+    {
+        if (n->next.sle_next == NULL) {
+            SLIST_REMOVE(&head, prev, _snake, next);
+            free(prev);
+        }
+
+        prev = n;
     }
 }
 
@@ -81,5 +96,5 @@ void snake_advance(enum direction_t direction)
 
     SLIST_INSERT_HEAD(&head, node, next);
 
-    // todo remove node from the tail of the snake
+    remove_last();
 }

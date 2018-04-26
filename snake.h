@@ -1,6 +1,8 @@
 #include <stdbool.h>
 #include <sys/queue.h>
 
+#define SNAKE_INITIAL_LENGTH 5
+
 typedef struct
 {
     int x;
