@@ -25,22 +25,10 @@ void clear_terminal()
 
 void print_board()
 {
-    clear_terminal();
+    snake_t *n;
 
-    for (int y = 0; y < BOARD_Y; y++)
+    SLIST_FOREACH(n, &head, next)
     {
-        for (int x = 0; x < BOARD_X; x++)
-        {
-            if (is_snake(x, y))
-            {
-                print_green("@");
-            }
-            else
-            {
-                printf(" ");
-            }
-        }
-
-        printf("\n");
+        mvaddch(n->position.y, n->position.x, 'X');
     }
 }
