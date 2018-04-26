@@ -15,6 +15,8 @@ typedef struct _snake
     next;
 } snake_t;
 
+enum direction_t { Up, Down, Left, Right };
+
 // creates a stuct for the head of the list
 SLIST_HEAD(head_s, _snake) head;
 
