@@ -41,7 +41,9 @@ int main()
 	cbreak();
 	noecho();
 	keypad(stdscr, TRUE);
-    timeout(200);
+    timeout(100);
+    // hide cursor
+    curs_set(0);
 
     while (true)
     {
@@ -52,11 +54,9 @@ int main()
 
         refresh();
 
-        nanosleep(&t, NULL);
+        // nanosleep(&t, NULL);
         set_direction();
     }
 
     endwin();
-
-    // todo ncurses for keyboard input
 }
