@@ -89,7 +89,7 @@ void snake_advance(enum direction_t direction)
 
     // create the new node
     snake_t *node;
-    node = (snake_t *)malloc(sizeof(snake_t));
+    node = malloc(sizeof(snake_t));
     // set the position of the new node based on the current direction
     node->position.x = snake_first->position.x + x;
     node->position.y = snake_first->position.y + y;

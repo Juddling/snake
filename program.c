@@ -1,5 +1,6 @@
 #include <time.h>
 #include <ncurses.h>
+#include <stdlib.h>
 
 #include "snake.h"
 #include "board.h"
@@ -26,15 +27,14 @@ void set_direction()
     }
 }
 
+int random_number(int minimum_number, int max_number)
+{
+    return rand() % (max_number + 1 - minimum_number) + minimum_number;
+}
+
 int main()
 {
     snake_initialise();
-
-    // delay init
-    int miliseconds = 200;
-    struct timespec t;
-    t.tv_sec = 0;
-    t.tv_nsec = miliseconds * 1000 * 1000;
 
     // ncurses init
     initscr();
@@ -45,16 +45,20 @@ int main()
     // hide cursor
     curs_set(0);
 
+    // init food
+    food.x = random_number(0, COLS);
+    food.y = random_number(0, LINES);
+
     while (true)
     {
         clear();
 
         snake_advance(direction);
         print_board();
+        print_food(food);
 
         refresh();
 
-        // nanosleep(&t, NULL);
         set_direction();
     }
 
