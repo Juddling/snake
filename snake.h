@@ -10,21 +10,14 @@ typedef struct
 {
     int x;
     int y;
-} position;
+} position_t, food_t;
 
 // snake is just a singley linked list
 typedef struct _snake
 {
-    position position;
-    SLIST_ENTRY(_snake)
-    next;
+    position_t position;
+    SLIST_ENTRY(_snake) next;
 } snake_t;
-
-
-typedef struct {
-    int x;
-    int y;
-} food_t;
 
 enum direction_t { Up, Down, Left, Right };
 

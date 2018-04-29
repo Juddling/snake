@@ -4,6 +4,7 @@
 
 #include "snake.h"
 #include "board.h"
+#include "food.h"
 
 enum direction_t direction = Right;
 
@@ -32,20 +33,12 @@ void random_init()
     srand(time(NULL));
 }
 
-int random_number(int minimum_number, int max_number)
-{
-    return rand() % (max_number + 1 - minimum_number) + minimum_number;
-}
-
 int main()
 {
     snake_init();
     ncurses_init();
     random_init();
-
-    // init food
-    food.x = random_number(0, COLS);
-    food.y = random_number(0, LINES);
+    food_move();
 
     while (true)
     {

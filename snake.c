@@ -4,6 +4,7 @@
 #include <sys/queue.h>
 
 #include "snake.h"
+#include "food.h"
 
 bool is_snake(int x, int y)
 {
@@ -24,7 +25,7 @@ void snake_init()
 {
     SLIST_INIT(&head);
 
-    position p = {1, 1};
+    position_t p = {1, 1};
     snake_t *node;
 
     // add three nodes to the snake
@@ -95,6 +96,12 @@ void snake_advance(enum direction_t direction)
     node->position.y = snake_first->position.y + y;
 
     SLIST_INSERT_HEAD(&head, node, next);
+
+    if (is_food(node, food)) {
+        // add another node
+        food_move();
+        // add 1 to the score
+    }
 
     remove_last();
 }
