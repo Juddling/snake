@@ -20,7 +20,7 @@ bool is_snake(int x, int y)
 }
 
 // sets up the snake's initial position
-void snake_initialise()
+void snake_init()
 {
     SLIST_INIT(&head);
 

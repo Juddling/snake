@@ -32,7 +32,7 @@ enum direction_t { Up, Down, Left, Right };
 SLIST_HEAD(head_s, _snake) head;
 
 bool is_snake(int x, int y);
-void snake_initialise();
+void snake_init();
 void snake_advance();
 
 food_t food;

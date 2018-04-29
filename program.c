@@ -27,6 +27,11 @@ void set_direction()
     }
 }
 
+void random_init()
+{
+    srand(time(NULL));
+}
+
 int random_number(int minimum_number, int max_number)
 {
     return rand() % (max_number + 1 - minimum_number) + minimum_number;
@@ -34,11 +39,9 @@ int random_number(int minimum_number, int max_number)
 
 int main()
 {
-    snake_initialise();
+    snake_init();
     ncurses_init();
-
-    // initialise random number
-    srand(time(NULL));
+    random_init();
 
     // init food
     food.x = random_number(0, COLS);
