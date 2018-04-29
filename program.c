@@ -44,6 +44,8 @@ int main()
     timeout(100);
     // hide cursor
     curs_set(0);
+    // initialise random number
+    srand(time(NULL));
 
     // init food
     food.x = random_number(0, COLS);
