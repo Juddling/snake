@@ -35,15 +35,8 @@ int random_number(int minimum_number, int max_number)
 int main()
 {
     snake_initialise();
+    ncurses_init();
 
-    // ncurses init
-    initscr();
-	cbreak();
-	noecho();
-	keypad(stdscr, TRUE);
-    timeout(100);
-    // hide cursor
-    curs_set(0);
     // initialise random number
     srand(time(NULL));
 
@@ -64,5 +57,5 @@ int main()
         set_direction();
     }
 
-    endwin();
+    ncurses_end();
 }

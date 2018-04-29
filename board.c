@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ncurses.h>
 
 #include "board.h"
 #include "snake.h"
@@ -39,4 +40,21 @@ void print_board()
 void print_food(food_t food)
 {
     mvaddch(food.y, food.x, FOOD_CHAR);
+}
+
+void ncurses_init()
+{
+    initscr();
+	cbreak();
+	noecho();
+	keypad(stdscr, TRUE);
+    timeout(DELAY);
+
+    // hide cursor
+    curs_set(0);
+}
+
+void ncurses_end()
+{
+    endwin();
 }
