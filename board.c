@@ -16,15 +16,11 @@
 #define SNAKE_CHAR  'X'
 #define FOOD_CHAR   'F'
 
+extern int score;
+
 void print_green(const char *content)
 {
     printf(ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET, content);
-}
-
-void clear_terminal()
-{
-    // woo escape codes
-    printf("\033[H\033[J");
 }
 
 void print_board()
@@ -40,6 +36,11 @@ void print_board()
 void print_food(food_t food)
 {
     mvaddch(food.y, food.x, FOOD_CHAR);
+}
+
+void print_score()
+{
+    mvprintw(0, COLS - 12, "Score: %d", score);
 }
 
 void ncurses_init()

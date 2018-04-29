@@ -7,6 +7,7 @@
 #include "food.h"
 
 enum direction_t direction = Right;
+extern int score;
 
 void set_direction()
 {
@@ -39,7 +40,8 @@ int main()
     ncurses_init();
     random_init();
     food_move();
-
+    score = 0;
+    
     while (true)
     {
         clear();
@@ -47,6 +49,7 @@ int main()
         snake_advance(direction);
         print_board();
         print_food(food);
+        print_score();
 
         refresh();
 

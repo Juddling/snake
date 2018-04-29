@@ -6,6 +6,8 @@
 #include "snake.h"
 #include "food.h"
 
+extern int score;
+
 bool is_snake(int x, int y)
 {
     snake_t *n;
@@ -100,7 +102,7 @@ void snake_advance(enum direction_t direction)
     if (is_food(node, food)) {
         // add another node
         food_move();
-        // add 1 to the score
+        score++;
     }
 
     remove_last();
